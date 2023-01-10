@@ -13,14 +13,35 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// express-session
+var session = require("express-session");
+app.use(session({secret:"mypage", resave:true, saveUninitialized:true}));
+
+// express-validator
+var validator = require("express-validator");
+app.use(validator());
+
+// connect-flash
+var flash = require("connect-flash");
+app.use(flash());
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// routes
+var routes = require("./routes/index");
+var login = require("./routes/login");
+var messageBoard = require("./routes/messageBoard");
+var signup = require("./routes/signup");
+var user = require("./routes/user");
+app.use("/", routes);
+app.use("/login", login);
+app.use("/signup", messageBoard);
+app.use("/user", signup);
+app.use("/messageBoard", user);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

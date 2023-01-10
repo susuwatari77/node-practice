@@ -18,8 +18,7 @@ var session = require("express-session");
 app.use(session({secret:"mypage", resave:true, saveUninitialized:true}));
 
 // express-validator
-var validator = require("express-validator");
-app.use(validator());
+const {check, validationResult} = require("express-validator");
 
 // connect-flash
 var flash = require("connect-flash");
@@ -39,9 +38,9 @@ var signup = require("./routes/signup");
 var user = require("./routes/user");
 app.use("/", routes);
 app.use("/login", login);
-app.use("/signup", messageBoard);
-app.use("/user", signup);
-app.use("/messageBoard", user);
+app.use("/signup", signup);
+app.use("/user", user);
+app.use("/messageBoard", messageBoard);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

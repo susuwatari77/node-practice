@@ -8,6 +8,8 @@ admin.initializeApp({
   databaseURL: "https://testiot-24287.firebaseio.com"
 });
 var fireDB = admin.database();
+
+// self-test
 // fireData.ref('todos').set({"title":123})
 // .then(function() {
 //     fireData.ref('todos').once('value', function(snapshot) {
